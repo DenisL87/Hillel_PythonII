@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from new_app import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('person/', views.validate, name='person'),
+    path('details/<int:pk>/', views.poll_details, name='details')
 ]
