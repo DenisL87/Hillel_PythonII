@@ -11,6 +11,11 @@ class Publisher(models.Model):
 
 
 class Book(models.Model):
+    def __init__(self, *args, **kwargs):
+        super().__init__(args, kwargs)
+        self.publisher_set = Publisher
+        self.author_set = Author
+
     name = models.CharField(max_length=300)
     pages = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
