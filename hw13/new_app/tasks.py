@@ -31,3 +31,8 @@ def parse(page, start, stop):
         quotes_2_add.append(Quote(text=quotes[i], author_id=author_ids[i]))
         i += 1
     Quote.objects.bulk_create(quotes_2_add)
+
+
+@shared_task()
+def send_mail():
+    pass
