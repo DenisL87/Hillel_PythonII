@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from new_app.views import BooksList
+from new_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('books_list/', BooksList.as_view(), name='books_list')
+    path('books_list/', views.BooksListView.as_view(), name='books_list'),
+    path('create_object/', views.CreateObjectView.as_view(), name='create_object'),
+    path('edit_object/', views.EditObjectView.as_view(), name='edit_object'),
+    path('delete_object/', views.DeleteObjectView.as_view(), name='delete_object'),
 ]
