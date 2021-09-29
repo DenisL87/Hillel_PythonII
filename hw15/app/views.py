@@ -1,8 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
 
 from app.models import Book
+from .forms import DeleteBookForm, CreateBookForm
 
 
 class BooksListView(generic.ListView):
@@ -15,9 +17,17 @@ class BooksListView(generic.ListView):
 
 class CreateObjectView(LoginRequiredMixin, generic.CreateView):
     model = Book
-    fields = ['name', 'authors', 'price']
-
+    form = CreateBookForm()
+    fields = ['name', 'authors', 'pages', 'price', 'publisher', 'rating', 'pubdate']
     template_name = 'catalog/create_object.html'
+
+    def validate(request):
+        if request.method == 'POST':
+            form = CreateBookForm(request.POST)
+            if form.is_valid():
+                return HttpResponseRedirect('created')
+        else:
+            form = CreateBookForm()
 
 
 class EditObjectView(LoginRequiredMixin, generic.UpdateView):
@@ -29,5 +39,5 @@ class EditObjectView(LoginRequiredMixin, generic.UpdateView):
 
 class DeleteObjectView(LoginRequiredMixin, generic.DeleteView):
     model = Book
-
+    form = DeleteBookForm()
     template_name = 'catalog/delete_object.html'

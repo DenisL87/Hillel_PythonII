@@ -1,4 +1,7 @@
+
 {% block content %}
+    <form action="/delete_object/" method="post">
+    {% csrf_token %}
 <h1>Delete Book</h1>
 
 {% endblock %}
