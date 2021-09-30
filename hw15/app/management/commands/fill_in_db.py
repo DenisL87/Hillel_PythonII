@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         fake = Faker()
         authors = []
-        for i in range(30):
+        for i in range(300):
             authors.append(Author(name=fake.name(), age=random.randint(30, 100)))
         Author.objects.bulk_create(authors)
 
@@ -25,7 +25,7 @@ class Command(BaseCommand):
         publisher_ids = Publisher.objects.values_list('id', flat=True)
         authors_ids = Author.objects.values_list('id', flat=True)
         books = []
-        for i in range(100):
+        for i in range(1000):
             books.append(Book(name='book_' + str(i),
                               pages=random.randint(50, 1000),
                               price=random.uniform(5.0, 500.0),

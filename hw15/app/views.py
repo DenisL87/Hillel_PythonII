@@ -10,7 +10,7 @@ from .forms import DeleteBookForm, CreateBookForm
 class BooksListView(generic.ListView):
     model = Book
     queryset = Book.objects.prefetch_related('authors')
-    paginate_by = 10
+    paginate_by = 100
 
     template_name = 'catalog/books_list.html'
 

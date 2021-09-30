@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('books_list/', views.BooksListView.as_view(), name='books_list'),
+    path('books_list/', cache_page(5)(views.BooksListView.as_view()), name='books_list'),
     path('create_object/', views.CreateObjectView.as_view(), name='create_object'),
     path('edit_object/<int:pk>/', views.EditObjectView.as_view(), name='edit_object'),
     path('delete_object/<int:pk>/', views.DeleteObjectView.as_view(), name='delete_object'),
