@@ -1,0 +1,33 @@
+{% block content %}
+
+<h1>Posts List</h1>
+{% if posts_list %}
+    <ul>
+        {% for post in posts_list %}
+            <li>
+                <a href="{{ post.get_absolute_url }}">{{ post.name }}</a>({{ post.authors.name }}
+            </li>
+        {% endfor %}
+    </ul>
+{{ else }}
+    <p>There are no posts</p>
+{% endif %}
+{% endblock %}
+
+{% block pagination %}
+    {% if is_paginated %}
+        <div class="pagination">
+        <span class="page_links">
+            {% if page_obj.has_previous %}
+                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+        <span class="page-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+            {% if page_obj.has_next %}
+                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+       </span>
+        </div>
+    {% endif %}
+{% endblock %}
