@@ -1,0 +1,13 @@
+{% block content %}
+    {% for person in People %}
+        <li>
+            {{ person.first_name }}
+            {{ person.last_name }}
+            <br>
+            "phone:"{{ person.phone }}
+            <br>
+            "address:"{{ person.address }}
+            <br>
+        </li>
+    {% endfor %}
+{% endblock %}

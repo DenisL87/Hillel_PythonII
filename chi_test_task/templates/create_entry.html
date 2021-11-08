@@ -1,0 +1,11 @@
+{% block contemt %}
+    <form action="{% url 'new_entry' %}" method="post">
+        {% csrf_token %}
+        {{ form.first_name }}
+        {{ form.last_name }}
+        {{ form.phone }}
+        {{ form.address }}
+
+        <button type="submit" name="create"></button>
+    </form>
+{% endblock %}
