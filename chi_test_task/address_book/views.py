@@ -41,9 +41,19 @@ def search_entry(request):
         return render(request, 'search_entry.html', {'form': form})
 
 
-def edit_entry(request):
-    pass
+def edit_entry(request, index):
+    if request.method == 'POST':
+        form = EditEntry(request.POST)
+        Person.objects.filter(id=index).update(first_name=form.cleaned_data['first_name'],
+                                               last_name=form.cleaned_data['last_name'],
+                                               phone=form.cleaned_data['phone'],
+                                               address=form.cleaned_data['address'])
+        # person.save()
+        return HttpResponseRedirect('address_book')
 
 
-def delete_entry(request):
-    pass
+def delete_entry(request, index):
+    person = Person.objects.get(id=index)
+    if request.method == 'POST':
+        person.delete()
+        return HttpResponseRedirect('address_book')

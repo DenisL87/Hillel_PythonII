@@ -21,9 +21,13 @@ class SearchEntry(forms.Form):
     matches = []
 
 
-class EditEntry(forms.Form):
-    pass
+class EditEntry(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = ['first_name', 'last_name', 'phone', 'address']
 
 
-class DeleteEntry(forms.Form):
-    pass
+class DeleteEntry(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = ['first_name', 'last_name', 'phone', 'address']
