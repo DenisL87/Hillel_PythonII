@@ -1,10 +1,8 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.views import View
+from django.shortcuts import render
 
-from address_book.forms import AddressBookForm
 from address_book.models import Person
-from .forms import NewEntry
+from .forms import NewEntry, SearchEntry, EditEntry, DeleteEntry
 
 
 def address_book(request):
@@ -27,26 +25,25 @@ def new_entry(request):
         return render(request, 'create_entry.html', {'form': form})
 
 
-def delete_entry(request):
-    pass
+def search_entry(request):
+    if request.method == 'POST':
+        form = SearchEntry(request.POST)
+        if form.is_valid():
+            entries = Person.objects.all()
+            for i in entries:
+                input = form.cleaned_data['input']
+                if (input == entries[i]['first_name'] or input == entries[i]['last_name']
+                        or input == entries[i]['phone'] or input == entries[i]['address']):
+                    form.matches.append(entries[i])
+        return render(request, 'search_entry.html', {'form': form})
+    else:
+        form = SearchEntry()
+        return render(request, 'search_entry.html', {'form': form})
 
 
 def edit_entry(request):
     pass
 
 
-def search_entry(request):
+def delete_entry(request):
     pass
-
-
-# class CreateEntry(View):
-#     def get(self, request):
-#         form = AddressBookForm()
-#         return render(request, 'create_entry.html', context={'form': form})
-#
-#     def post(self, request):
-#         form = AddressBookForm(request.POST)
-#         if form.is_valid():
-#             new_entry = form.save()
-#             return redirect(new_entry)
-#         return render(request, 'create_entry.html', context={'form': form})

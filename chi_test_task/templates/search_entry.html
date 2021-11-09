@@ -1,0 +1,11 @@
+{% block contemt %}
+    <form action="{% url 'search_entry' %}" method="post">
+        {% csrf_token %}
+        {{ form.input }}
+        <br>
+        <li>
+            {{ form.matches }}
+        </li>
+        <button type="submit" name="search"></button>
+    </form>
+{% endblock %}
