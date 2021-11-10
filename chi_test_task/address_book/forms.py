@@ -6,7 +6,7 @@ from address_book.models import Person
 class AddressBookForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['first_name', 'last_name', 'phone', 'address']
+        fields = ['first_name', 'last_name', 'phone', 'address', 'url']
 
 
 class NewEntry(forms.Form):
@@ -14,6 +14,7 @@ class NewEntry(forms.Form):
     last_name = forms.CharField(label='Last Name', max_length=100)
     phone = forms.CharField(label='Phone', max_length=100)
     address = forms.CharField(label='Address', max_length=100)
+    url = forms.URLField(label='URL')
 
 
 class SearchEntry(forms.Form):
@@ -24,10 +25,10 @@ class SearchEntry(forms.Form):
 class EditEntry(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['first_name', 'last_name', 'phone', 'address']
+        fields = ['first_name', 'last_name', 'phone', 'address', 'url']
 
 
 class DeleteEntry(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['first_name', 'last_name', 'phone', 'address']
+        fields = ['first_name', 'last_name', 'phone', 'address', 'url']

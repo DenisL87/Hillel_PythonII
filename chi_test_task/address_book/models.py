@@ -12,3 +12,4 @@ class Person(models.Model):
     last_name = models.CharField(max_length=125)
     phone = models.CharField(max_length=20)
     address = models.CharField(max_length=150)
+    url = models.URLField(blank=True)

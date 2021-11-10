@@ -1,5 +1,5 @@
 {% block content %}
-    {% for person in People %}
+    {% for person in people %}
         <li>
             {{ person.first_name }}
             {{ person.last_name }}
@@ -8,6 +8,7 @@
             <br>
             "address:"{{ person.address }}
             <br>
+            "URL:"{{ person.url }}
         </li>
     {% endfor %}
 {% endblock %}
