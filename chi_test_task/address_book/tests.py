@@ -9,5 +9,6 @@ class PersonTestCase(TestCase):
                               last_name='Johnson',
                               address='London',
                               phohe='124578',
-                              url='')
+                              url='',
+                              image='')
 
