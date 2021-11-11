@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'address_book',
+
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
