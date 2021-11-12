@@ -8,8 +8,8 @@ class PersonSerializer(serializers.ModelSerializer):
     last_name = serializers.CharField(required=True)
     phone = serializers.CharField(required=True)
     address = serializers.CharField(required=True)
-    url = serializers.URLField(required=True)
-    image = serializers.ImageField(required=True)
+    url = serializers.URLField(required=False)
+    image = serializers.ImageField(required=False)
 
     class Meta:
         model = Person

@@ -18,6 +18,7 @@ from django.urls import path, include
 
 from address_book.views import new_entry, address_book, delete_entry, edit_entry, search_entry
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('address_book.api.urls')),
