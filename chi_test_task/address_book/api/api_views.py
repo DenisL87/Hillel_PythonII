@@ -1,6 +1,12 @@
 from rest_framework import status
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import (ListAPIView,
+                                     RetrieveAPIView,
+                                     CreateAPIView,
+                                     UpdateAPIView,
+                                     DestroyAPIView)
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .serializers import PersonSerializer
 from ..models import Person
@@ -9,6 +15,9 @@ from ..models import Person
 class PersonListAPIView(ListAPIView):
     serializer_class = PersonSerializer
     queryset = Person.objects.all()
+    filter_backends = (DjangoFilterBackend, SearchFilter)
+    filter_fields = ['id', 'first_name', 'last_name', 'phone', 'address', 'url']
+    search_fields = ['id', 'first_name', 'last_name', 'phone', 'address', 'url']
 
 
 class NewEntryAPIView(CreateAPIView):
@@ -16,10 +25,12 @@ class NewEntryAPIView(CreateAPIView):
     serializer_class = PersonSerializer
 
 
-class SearchAPIView(RetrieveAPIView):
-    queryset = Person.objects.all()
-    serializer_class = PersonSerializer
-    lookup_field = 'id'
+# class SearchAPIView(ListAPIView):
+#     queryset = Person.objects.all()
+#     serializer_class = PersonSerializer
+#     filter_backends = (DjangoFilterBackend, SearchFilter)
+#     filter_fields = ['id', 'first_name', 'last_name', 'phone', 'address', 'url']
+#     search_fields = ['id', 'first_name', 'last_name', 'phone', 'address', 'url']
 
 
 class EditAPIView(UpdateAPIView):
@@ -40,7 +51,7 @@ class EditAPIView(UpdateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class DeleteAPIView(DestroyAPIView):
+class DeleteAPIView(RetrieveAPIView, DestroyAPIView):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
     lookup_field = 'id'

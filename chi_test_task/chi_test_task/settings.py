@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'address_book',
 
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
